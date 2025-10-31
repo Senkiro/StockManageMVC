@@ -13,6 +13,10 @@ namespace StockManageMVC.Models
 
         public ProductModel Product { get; set; }
 
+        public int SupplierId { get; set; }
+
+        public SupplierModel Supplier { get; set; }
+
         [Required(ErrorMessage ="Vui lòng nhập số lượng sản phẩm")]
         [Range(1, int.MaxValue, ErrorMessage ="Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }

@@ -1,0 +1,36 @@
+﻿@model SupplierModel
+@{
+	ViewData["Title"] = "Create Supplier";
+}
+<h3>Thêm nhà cung cấp</h3>
+<form asp-controller="Supplier" asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" asp-for="Name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Name" class="text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <input type="text" asp-for="Address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Address" class="text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" asp-for="Phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">            
+        <span asp-validation-for="Phone" class="text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Email" class="text text-danger"></span>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Save</button>
+	<a class="btn btn-secondary" asp-controller="Supplier" asp-action="Index">Back to List</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -21,6 +21,7 @@ namespace StockManageMVC.Areas.Admin.Controllers
         {
             var imports = await _dbContext.WarehouseTransactions
                 .Include(t => t.Product)
+                .Include(t=> t.Supplier)
                 .Where(t => t.TransactionType == "Import")
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync();
@@ -46,6 +47,8 @@ namespace StockManageMVC.Areas.Admin.Controllers
                     Text = $"{p.ProductName} (Tồn: {p.ProductQuantity})"
                 })
                 .ToList();
+           
+            ViewBag.Supppiers = new SelectList(_dbContext.Supplier,"Id","Name");
             ViewBag.Products = productList;
             return View();
         }
@@ -55,6 +58,7 @@ namespace StockManageMVC.Areas.Admin.Controllers
         public async Task<IActionResult> Import(WarehouseTransactionModel model)
         {
             ModelState.Remove("TransactionType");
+            ModelState.Remove("Supplier");
             ModelState.Remove("Product");
             if (ModelState.IsValid)
             {
@@ -81,6 +85,8 @@ namespace StockManageMVC.Areas.Admin.Controllers
                     Text = $"{p.ProductName} (Tồn: {p.ProductQuantity})"
                 })
                 .ToList();
+
+            ViewBag.Supppiers = new SelectList(_dbContext.Supplier, "Id", "Name");
             ViewBag.Products = productList;
             return View(model);
         }
