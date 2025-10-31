@@ -1,0 +1,35 @@
+﻿@model IEnumerable<IdentityUser>
+@{
+    ViewData["Title"] = "List Users";
+}
+
+<div class="text-center">
+    <h1 class="display-4">List Users</h1>
+    <a class="btn btn-primary" asp-controller="User" asp-action="Create">Create User</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                        <form asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" method="post" style="display:inline-block" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
