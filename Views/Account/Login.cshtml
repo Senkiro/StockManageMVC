@@ -5,9 +5,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Đăng nhập tài khoản cms</h1>
-
     <form method="post" asp-asp-controller="Account" asp-action="Login">
-		@Html.AntiForgeryToken();
+		@Html.AntiForgeryToken()
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" asp-for = "Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -24,3 +23,6 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

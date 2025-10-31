@@ -1,0 +1,45 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Edit Product</h1>
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Index">List Product</a>
+    <form asp-controller="Product" asp-action="Edit" method="post">
+		@Html.AntiForgeryToken()
+		<input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Product code</label>
+            <input type="text" asp-for="ProductCode" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Product Name</label>
+            <input type="text" asp-for="ProductName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Product Description</label>
+            <input type="text" asp-for="ProductDescription" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">            <span asp-validation-for="ProductCode" class="text text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Product Quantity</label>
+            <input type="text" readonly asp-for="ProductQuantity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <select class="form-select" asp-for="ProductUnit" aria-label="Default select example">
+                <option value="cái">cái</option>
+                <option value="thùng">thùng</option>
+                <option value="bịch">bịch</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Location</label>
+            <input type="text" asp-for="Location" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

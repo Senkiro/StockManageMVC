@@ -36,7 +36,7 @@ namespace StockManageMVC.Controllers
             if (result.Succeeded)
             {
                 TempData["SuccessMessage"] = "Đăng nhập thành công!";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Admin");
             }
             return View();
         }
@@ -74,6 +74,14 @@ namespace StockManageMVC.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            TempData["SuccessMessage"] = "Đăng xuất thành công!";
+            return RedirectToAction("Login", "Account");
         }
     }
 }
