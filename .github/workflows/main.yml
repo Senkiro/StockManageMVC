@@ -1,6 +1,7 @@
 name: Test Workflow
 
 on:
+  workflow_dispatch:   # chạy thủ công
   push:
     branches: [ main ]
   pull_request:
@@ -20,10 +21,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # sửa đúng version nếu bạn dùng .NET 6 hoặc 7
-
+          dotnet-version: '8.0.x'
+      
       - name: Restore dependencies
         run: dotnet restore
-
+      
       - name: Build project
         run: dotnet build --configuration Release --no-restore
