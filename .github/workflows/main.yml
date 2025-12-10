@@ -1,30 +1,32 @@
-name: Test Workflow
+name: Auto Merge Hotfix to Main
 
 on:
-  workflow_dispatch:   # chạy thủ công
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - 'hotfix/*'   # mọi nhánh hotfix
 
 jobs:
-  build:
+  merge:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout main
         uses: actions/checkout@v3
-      
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions!"
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          ref: main
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+      - name: Merge hotfix into main
+        run: |
+          git fetch origin
+          git merge origin/${{ github.ref_name }} --no-ff -m "Auto merge hotfix ${{ github.ref_name }} into main"
       
-      - name: Restore dependencies
-        run: dotnet restore
-      
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore
+      - name: Push to main
+        run: |
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
